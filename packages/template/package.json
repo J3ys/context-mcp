@@ -34,6 +34,7 @@
     "openai": "^6.9.1",
     "tiktoken": "^1.0.22",
     "turndown": "^7.2.4",
+    "web-tree-sitter": "0.26.11",
     "yaml": "^2.8.2",
     "zod": "^4.2.1"
   },

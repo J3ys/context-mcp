@@ -52,3 +52,5 @@ core
 core.*
 *.core
 vgcore.*
+
+packages/template/grammars/

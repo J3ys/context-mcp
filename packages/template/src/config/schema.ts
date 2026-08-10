@@ -11,6 +11,9 @@ import { z } from 'zod';
 // SOURCE SCHEMA
 // =============================================================================
 
+export const CODE_PARSER_LANGUAGE_IDS = ['java', 'typescript', 'javascript', 'python'] as const;
+export type CodeParserLanguage = (typeof CODE_PARSER_LANGUAGE_IDS)[number];
+
 export const SourceSchema = z
   .object({
     // Identity
@@ -50,7 +53,9 @@ export const SourceSchema = z
     localPath: z.string().optional(),
 
     // Parser type
-    parser: z.enum(['mdx', 'markdown', 'openapi', 'html']),
+    parser: z.enum(['mdx', 'markdown', 'openapi', 'html', 'code']),
+
+    codeGranularity: z.enum(['method', 'class']).optional(),
 
     // Metadata enrichment
     language: z.string().optional(),
@@ -86,6 +91,16 @@ export const SourceSchema = z
     {
       message:
         'Source must have repository (for github/gitlab), url (for url), or localPath (for local)',
+    }
+  )
+  .refine(
+    data => {
+      if (data.parser !== 'code') return true;
+      return (CODE_PARSER_LANGUAGE_IDS as readonly string[]).includes(data.language ?? '');
+    },
+    {
+      message:
+        "Source with parser: code requires language to be 'java', 'typescript', 'javascript', or 'python'",
     }
   );
 
@@ -142,6 +157,14 @@ const ChunkingSchema = z
   })
   .optional();
 
+const CodeGrammarEntrySchema = z.object({
+  extensions: z.array(z.string()).min(1),
+  wasmPath: z.string(),
+  astFlavor: z.enum(['java', 'web', 'python']),
+});
+
+const CodeGrammarsSchema = z.record(z.string(), z.array(CodeGrammarEntrySchema)).optional();
+
 export const ConfigSchema = z.object({
   vectordb: VectorDbSchema,
   embeddings: EmbeddingsSchema.optional().transform(
@@ -152,6 +175,7 @@ export const ConfigSchema = z.object({
     v => v ?? { clearBeforeReindex: true, batchSize: 100 }
   ),
   chunking: ChunkingSchema,
+  codeGrammars: CodeGrammarsSchema,
 });
 
 // =============================================================================
@@ -160,3 +184,4 @@ export const ConfigSchema = z.object({
 
 export type SourceConfig = z.infer<typeof SourceSchema>;
 export type ContextMCPConfig = z.infer<typeof ConfigSchema>;
+export type CodeGrammarEntry = z.infer<typeof CodeGrammarEntrySchema>;

@@ -40,6 +40,8 @@ export interface EmbeddingRecord {
     path?: string;
     apiPath?: string;
     version?: string;
+    startLine?: number;
+    endLine?: number;
   };
 }
 
@@ -278,6 +280,24 @@ export async function generateEmbeddingsOllama(
 // PINECONE FUNCTIONS
 // =============================================================================
 
+export function shouldUseLocalPinecone(mode: string | undefined): boolean {
+  return mode === 'local';
+}
+
+export async function getPineconeIndex(
+  pc: Pinecone,
+  indexName: string,
+  mode: string | undefined = process.env.PINECONE_MODE
+) {
+  if (!shouldUseLocalPinecone(mode)) {
+    return pc.index(indexName);
+  }
+
+  const description = await pc.describeIndex(indexName);
+  const host = description.host.startsWith('http') ? description.host : `http://${description.host}`;
+  return pc.index(indexName, host);
+}
+
 /**
  * Initialize Pinecone index, creating if it doesn't exist
  * @param pc - Pinecone client
@@ -337,7 +357,7 @@ export async function clearPineconeIndex(
   indexName: string
 ): Promise<{ success: boolean; vectorCount?: number }> {
   try {
-    const index = pc.index(indexName);
+    const index = await getPineconeIndex(pc, indexName);
 
     // Get current stats before clearing
     const stats = await index.describeIndexStats();
@@ -387,7 +407,7 @@ export async function deletePineconeVectors(
   batchSize = 1000
 ): Promise<void> {
   if (ids.length === 0) return;
-  const index = pc.index(indexName);
+  const index = await getPineconeIndex(pc, indexName);
   for (let i = 0; i < ids.length; i += batchSize) {
     const batch = ids.slice(i, i + batchSize);
     await index.deleteMany(batch);
@@ -403,7 +423,7 @@ export async function getPineconeStats(
   pc: Pinecone,
   indexName: string
 ): Promise<{ vectorCount: number; dimension: number }> {
-  const index = pc.index(indexName);
+  const index = await getPineconeIndex(pc, indexName);
   const stats = await index.describeIndexStats();
   return {
     vectorCount: stats.totalRecordCount || 0,
@@ -445,6 +465,8 @@ export function chunkToRecord(chunk: DocChunk, embedding: number[]): EmbeddingRe
       method: chunk.metadata.method,
       path: chunk.metadata.path,
       version: chunk.metadata.version,
+      startLine: chunk.metadata.startLine,
+      endLine: chunk.metadata.endLine,
     },
   };
 }

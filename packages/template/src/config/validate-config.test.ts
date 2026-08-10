@@ -98,6 +98,43 @@ describe('validateConfigObject', () => {
     // The dimension error is aggregated, not dropped.
     expect(result.errors.some(e => /dimension/i.test(e))).toBe(true);
   });
+
+  it('accepts parser: code sources with a supported language', () => {
+    const config = {
+      ...validConfig,
+      sources: [
+        {
+          name: 'my-repo',
+          type: 'local',
+          localPath: '/tmp/my-repo',
+          parser: 'code',
+          language: 'java',
+        },
+      ],
+    };
+    const result = validateConfigObject(config);
+    expect(result.valid).toBe(true);
+  });
+
+  it('rejects parser: code sources with an unsupported language', () => {
+    const config = {
+      ...validConfig,
+      sources: [
+        {
+          name: 'my-repo',
+          type: 'local',
+          localPath: '/tmp/my-repo',
+          parser: 'code',
+          language: 'ruby',
+        },
+      ],
+    };
+    const result = validateConfigObject(config);
+    expect(result.valid).toBe(false);
+    expect(result.errors.some(e => /parser: code/i.test(e) || /supported language/i.test(e))).toBe(
+      true
+    );
+  });
 });
 
 describe('validateConfigText', () => {

@@ -62,6 +62,10 @@ export interface ChunkMetadata {
 
   // === Version (for changelogs) ===
   version?: string; // Version number (for changelogs)
+
+  // === Code/infra source locations ===
+  startLine?: number; // 1-indexed start line in the source file
+  endLine?: number; // 1-indexed end line in the source file
 }
 
 // =============================================================================

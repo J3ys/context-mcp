@@ -14,6 +14,8 @@ import { parseMDXSource } from './chunkers/mdx-chunker.js';
 import { parseMarkdownSource } from './chunkers/markdown-chunker.js';
 import { parseOpenAPISource } from './chunkers/openapi-router.js';
 import { parseHTMLSource } from './chunkers/html-chunker.js';
+import { parseCodeSource } from './chunkers/code-chunker.js';
+import type { CodeGrammarEntry } from '../config/schema.js';
 
 // Re-export types
 export type { DocChunk };
@@ -33,7 +35,8 @@ export type { DocChunk };
 export async function parseSource(
   source: SourceConfig,
   fetched: FetchedSource,
-  chunkConfig?: ChunkConfig
+  chunkConfig?: ChunkConfig,
+  codeGrammars?: Record<string, CodeGrammarEntry[]>
 ): Promise<DocChunk[]> {
   switch (source.parser) {
     case 'mdx':
@@ -51,6 +54,9 @@ export async function parseSource(
     case 'html':
       // Raw HTML documents (converted to Markdown, then chunked)
       return parseHTMLSource(source, fetched.localPath, chunkConfig);
+
+    case 'code':
+      return parseCodeSource(source, fetched.localPath, chunkConfig, codeGrammars);
 
     default:
       throw new Error(`Unknown parser type: ${source.parser}`);

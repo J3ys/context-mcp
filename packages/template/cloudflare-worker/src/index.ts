@@ -19,6 +19,7 @@ import { Pinecone } from '@pinecone-database/pinecone';
 import OpenAI from 'openai';
 import { GoogleGenAI } from '@google/genai';
 import { z } from 'zod';
+import { createPineconeClient, getPineconeIndex, isRerankEnabled } from './pinecone-local.js';
 
 // =============================================================================
 // TYPES
@@ -31,6 +32,8 @@ interface Env {
   GEMINI_API_KEY: string;
   COHERE_API_KEY: string;
   VOYAGE_API_KEY: string;
+  PINECONE_MODE: string;
+  PINECONE_CONTROLLER_HOST: string;
   OLLAMA_BASE_URL: string;
 
   // Configuration
@@ -190,11 +193,11 @@ async function searchDocs(
 ): Promise<SearchResult[]> {
   const defaultTopK = parseInt(env.DEFAULT_TOP_K, 10) || 10;
   const maxTopK = parseInt(env.MAX_TOP_K, 10) || 20;
-  const rerankEnabled = env.ENABLE_RERANK !== 'false';
+  const rerankEnabled = isRerankEnabled(env);
   const rerankFetchCount = parseInt(env.RERANK_FETCH_COUNT, 10) || 30;
 
   const returnCount = Math.min(Math.max(1, limit ?? defaultTopK), maxTopK);
-  const index = pinecone.index(env.PINECONE_INDEX_NAME);
+  const index = await getPineconeIndex(pinecone, env.PINECONE_INDEX_NAME, env.PINECONE_MODE);
   const queryEmbedding = await generateQueryEmbedding(env, query);
 
   const fetchCount = rerankEnabled ? rerankFetchCount : returnCount;
@@ -263,7 +266,7 @@ export class ContextMCP extends McpAgent<Env> {
     const serverName = env.SERVER_NAME || 'contextmcp';
     const description = env.SERVER_DESCRIPTION || 'Search documentation';
 
-    const pinecone = new Pinecone({ apiKey: env.PINECONE_API_KEY });
+    const pinecone = createPineconeClient(env);
 
     this.server.registerTool(
       'search_docs',
@@ -475,7 +478,7 @@ export default {
           });
         }
 
-        const pinecone = new Pinecone({ apiKey: env.PINECONE_API_KEY });
+        const pinecone = createPineconeClient(env);
         const results = await searchDocs(pinecone, env, query, limit);
         const formatted = formatResults(results, query, serverName);
 

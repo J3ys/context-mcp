@@ -28,6 +28,7 @@ import {
   initPineconeIndex,
   clearPineconeIndex,
   deletePineconeVectors,
+  getPineconeIndex,
   generateEmbeddingsOpenAI,
   generateEmbeddingsGemini,
   generateEmbeddingsCohere,
@@ -156,7 +157,7 @@ async function embedAndUpload(
   indexName: string,
   batchSize: number
 ): Promise<void> {
-  const index = pinecone.index(indexName);
+  const index = await getPineconeIndex(pinecone, indexName);
   const total = chunks.length;
   let uploaded = 0;
 
@@ -296,7 +297,13 @@ async function reindex(): Promise<void> {
 
   if (!args.dryRun) {
     validateEmbeddingEnv(config.embeddings.provider);
-    pinecone = new Pinecone({ apiKey: process.env.PINECONE_API_KEY! });
+    pinecone =
+      (process.env.PINECONE_MODE ?? 'cloud') === 'local'
+        ? new Pinecone({
+            apiKey: process.env.PINECONE_API_KEY || 'pclocal',
+            controllerHostUrl: process.env.PINECONE_CONTROLLER_HOST || 'http://pinecone:5080',
+          })
+        : new Pinecone({ apiKey: process.env.PINECONE_API_KEY! });
 
     switch (config.embeddings.provider) {
       case 'gemini':
@@ -378,8 +385,10 @@ async function reindex(): Promise<void> {
       fetchedSources.push(fetched);
 
       // Parse source
-      const chunks = await parseSource(source, fetched, chunkConfig);
-      allChunks.push(...chunks);
+      const chunks = await parseSource(source, fetched, chunkConfig, config.codeGrammars);
+      for (const chunk of chunks) {
+        allChunks.push(chunk);
+      }
 
       console.log(`   📊 ${chunks.length} chunks created`);
     } catch (error) {
