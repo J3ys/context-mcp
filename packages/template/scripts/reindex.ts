@@ -2,7 +2,7 @@
 /**
  * ContextMCP Unified Reindex Script
  *
- * Config-driven reindexing of all documentation sources.
+ * Config-driven reindexing of all configured project-context sources.
  * Reads from config.yaml, fetches sources, parses, embeds, and uploads.
  *
  * Usage:

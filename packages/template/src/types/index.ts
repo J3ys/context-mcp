@@ -58,7 +58,7 @@ export interface ChunkMetadata {
 
   // === Code/SDK context ===
   language?: string; // Programming language (typescript, python, etc.)
-  repository?: string; // GitHub repo (e.g., "dodopayments/dodopayments-typescript")
+  repository?: string; // GitHub repo (e.g., "exampleco/sdk-typescript")
 
   // === Version (for changelogs) ===
   version?: string; // Version number (for changelogs)

@@ -1,6 +1,6 @@
 # ContextMCP
 
-Self-hosted MCP server for your documentation. Index your docs, APIs, and SDKs for semantic search via the Model Context Protocol.
+Self-hosted MCP server for local project code and documentation. Index your docs, APIs, SDKs, and code for semantic search via the Model Context Protocol.
 
 ## Quick Start
 
@@ -38,9 +38,9 @@ You only need the API key for the provider you choose. `ollama` needs none — i
 runs fully offline against a local [Ollama](https://ollama.com) server (set
 `embeddings.ollama.baseUrl` in `config.yaml`, default `http://localhost:11434`).
 
-### 2. Configure Documentation Sources
+### 2. Configure Code And Documentation Sources
 
-Edit `config.yaml` to add your documentation sources:
+Edit `config.yaml` to add your code and documentation sources:
 
 ```yaml
 vectordb:
@@ -79,7 +79,7 @@ sources:
     language: typescript
 ```
 
-### 3. Index Your Documentation
+### 3. Index Your Project Context
 
 ```bash
 # Install dependencies
@@ -108,11 +108,13 @@ npm run deploy
 
 ## Available Parsers
 
-| Parser     | Use Case                                               | Extensions       |
-| ---------- | ------------------------------------------------------ | ---------------- |
-| `mdx`      | MDX/ documentation (Mintlify, Fumadocs)                | `.mdx`           |
-| `markdown` | Plain markdown files (READMEs, CHANGELOGs)             | `.md`            |
-| `openapi`  | OpenAPI/Swagger specifications                         | `.yaml`, `.json` |
+| Parser     | Use Case                                               | Extensions             |
+| ---------- | ------------------------------------------------------ | ---------------------- |
+| `mdx`      | MDX documentation (Mintlify, Fumadocs)                 | `.mdx`                 |
+| `markdown` | Plain markdown files (READMEs, CHANGELOGs)             | `.md`                  |
+| `openapi`  | OpenAPI/Swagger specifications                         | `.yaml`, `.json`       |
+| `html`     | Raw HTML pages converted into searchable text          | `.html`, `.htm`        |
+| `code`     | Source files chunked by class or method                | language-specific code |
 
 ## Source Types
 
@@ -127,8 +129,8 @@ npm run deploy
 
 ```
 ├── src/
-│   ├── parser/           # Document parsers
-│   │   ├── chunkers/     # MDX, Markdown, OpenAPI chunkers
+│   ├── parser/           # Project context parsers
+│   │   ├── chunkers/     # MDX, Markdown, OpenAPI, HTML, and code chunkers
 │   │   └── core/         # Shared utilities
 │   ├── embeddings/       # Embedding generation (OpenAI, Gemini, Cohere, Voyage, Ollama)
 │   ├── sources/          # GitHub, GitLab, local, URL fetchers
@@ -144,7 +146,7 @@ npm run deploy
 
 | Script                               | Description                     |
 | ------------------------------------ | ------------------------------- |
-| `npm run reindex`                    | Index all documentation sources |
+| `npm run reindex`                    | Index all configured sources    |
 | `npm run reindex:dry`                | Dry run (no uploads)            |
 | `npm run reindex:incremental`        | Only embed/upload changed chunks |
 | `npm run reindex -- --source=<name>` | Index specific source           |

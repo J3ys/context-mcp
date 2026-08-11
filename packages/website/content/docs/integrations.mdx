@@ -152,7 +152,7 @@ const completion = await openai.chat.completions.create({
 
 #### Embeddable Chat Widget (ContextChat)
 
-Prefer a ready-made UI over wiring the API yourself? [**ContextChat**](https://github.com/dodopayments/context-chat) is a drop-in "Ask AI" widget that streams cited answers from your ContextMCP backend. Deploy its Cloudflare Worker with `RETRIEVAL_URL` pointed at your ContextMCP `/search` endpoint (its default `contextmcp` adapter speaks this exact contract), then embed the widget on any page with one script tag:
+Prefer a ready-made UI over wiring the API yourself? [**ContextChat**](https://github.com/contextmcp/context-chat) is a drop-in "Ask AI" widget that streams cited answers from your ContextMCP backend. Deploy its Cloudflare Worker with `RETRIEVAL_URL` pointed at your ContextMCP `/search` endpoint (its default `contextmcp` adapter speaks this exact contract), then embed the widget on any page with one script tag:
 
 ```html
 <script>
@@ -165,4 +165,4 @@ Prefer a ready-made UI over wiring the API yourself? [**ContextChat**](https://g
 <script src="https://your-contextchat-worker.workers.dev/widget.js" defer></script>
 ```
 
-See the [ContextChat README](https://github.com/dodopayments/context-chat) for full setup and configuration.
+See the [ContextChat README](https://github.com/contextmcp/context-chat) for full setup and configuration.

@@ -27,7 +27,7 @@ export function HeroVisual() {
                         <div className="pl-4">
                             <span className="text-zinc-500">- </span>
                             <span className="text-blue-400">name:</span>
-                            <span className="text-[#60A5FA]"> dodo-docs</span>
+                            <span className="text-[#60A5FA]"> local-docs</span>
                         </div>
                         <div className="pl-6">
                             <span className="text-blue-400">type:</span>
@@ -35,7 +35,7 @@ export function HeroVisual() {
                         </div>
                         <div className="pl-6">
                             <span className="text-blue-400">repository:</span>
-                            <span className="text-white"> dodopayments/dodo-docs</span>
+                            <span className="text-white"> exampleco/docs</span>
                         </div>
                         <div className="pl-6">
                             <span className="text-blue-400">parser:</span>
@@ -98,7 +98,7 @@ export function HeroVisual() {
                             <span className="text-purple-400">"heading"</span>: <span className="text-zinc-300">"Quick Start"</span>,
                         </div>
                         <div className="pl-4">
-                            <span className="text-purple-400">"content"</span>: <span className="text-zinc-300">"To install Dodo Payments SDK..."</span>,
+                            <span className="text-purple-400">"content"</span>: <span className="text-zinc-300">"To install the TypeScript SDK..."</span>,
                         </div>
                         <div className="pl-4">
                             <span className="text-purple-400">"metadata"</span>: <span className="text-zinc-600">{`{`}</span>

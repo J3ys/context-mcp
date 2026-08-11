@@ -1,5 +1,5 @@
 {
-  "name": "dodo-knowledge-mcp-worker",
+  "name": "example-project-mcp-worker",
   "version": "1.0.0",
   "type": "module",
   "private": true,

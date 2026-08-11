@@ -50,7 +50,7 @@ function printBanner() {
   console.log(chalk.hex('#4e94f8').bold(' / /___/ /_/ / / / / /_/  __/>  </ /_/ /  / / /___/ ____/ '));
   console.log(chalk.hex('#4e94f8').bold(' \\____/\\____/_/ /_/\\__/\\___/_/|_|\\__/_/  /_/\\____/_/      '));
   console.log('');
-  console.log(chalk.dim('        Self-hosted MCP server for your documentation'));
+  console.log(chalk.dim('        Self-hosted MCP server for local project code and documentation'));
   console.log('');
 }
 
@@ -75,12 +75,12 @@ function printNextSteps(projectName: string) {
   console.log('');
 
   // Step 3: Configure
-  console.log(chalk.bold.white('  3. Configure your documentation sources'));
-  console.log(chalk.dim('     # Edit config.yaml to add your GitHub repos, docs, APIs'));
+  console.log(chalk.bold.white('  3. Configure your code and documentation sources'));
+  console.log(chalk.dim('     # Edit config.yaml to add your repos, docs, APIs, and code sources'));
   console.log('');
 
   // Step 4: Index
-  console.log(chalk.bold.white('  4. Index your documentation'));
+  console.log(chalk.bold.white('  4. Index your project context'));
   console.log(chalk.cyan('     npm run reindex'));
   console.log('');
 
@@ -98,7 +98,7 @@ function printNextSteps(projectName: string) {
   console.log(chalk.bold('  └─────────────────────────────────────────────────────────────┘'));
   console.log('');
   console.log(`  ${chalk.dim('Documentation:')}  ${chalk.cyan.underline('https://contextmcp.ai/docs')}`);
-  console.log(`  ${chalk.dim('GitHub:')}         ${chalk.cyan.underline('https://github.com/dodopayments/context-mcp')}`);
+  console.log(`  ${chalk.dim('GitHub:')}         ${chalk.cyan.underline('https://github.com/contextmcp/context-mcp')}`);
   console.log('');
 }
 

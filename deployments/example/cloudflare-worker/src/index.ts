@@ -1,5 +1,5 @@
 /**
- * Dodo Payments MCP Server - Cloudflare Workers
+ * Example Project MCP Server - Cloudflare Workers
  *
  * A remote MCP server with built-in Pinecone search.
  * Uses Cloudflare's agents framework for proper MCP support.
@@ -169,7 +169,7 @@ async function searchDocs(
 
 function formatResults(results: SearchResult[], query: string): string {
   const lines: string[] = [
-    '# Dodo Payments Documentation',
+    '# Example Project Context',
     `> Query: ${query}`,
     `> Results: ${results.length}`,
     '',
@@ -195,9 +195,9 @@ function formatResults(results: SearchResult[], query: string): string {
 // MCP SERVER
 // =============================================================================
 
-export class DodoKnowledgeMCP extends McpAgent<Env> {
+export class ExampleProjectMCP extends McpAgent<Env> {
   server = new McpServer({
-    name: 'dodo-knowledge-mcp',
+    name: 'example-project-mcp',
     version: '1.0.0',
   });
 
@@ -208,13 +208,13 @@ export class DodoKnowledgeMCP extends McpAgent<Env> {
     // Initialize clients
     const pinecone = new Pinecone({ apiKey: env.PINECONE_API_KEY });
 
-    // Register the search_docs tool
+    // Register the search_project_context tool
     this.server.registerTool(
-      'search_docs',
+      'search_project_context',
       {
-        title: 'Search Dodo Payments Documentation',
+        title: 'Search Example Project Context',
         description:
-          'Search the Dodo Payments documentation using semantic search across API Reference, SDK docs, BillingSDK, and guides.',
+          'Search the Example Project code and documentation using semantic search across docs, APIs, SDKs, and code repositories.',
         inputSchema: {
           query: z
             .string()
@@ -268,7 +268,7 @@ function generateLandingPage(baseUrl: string): string {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dodo Knowledge MCP</title>
+   <title>Example Project MCP</title>
   <style>
     body { font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto; padding: 2rem; line-height: 1.6; }
     pre, code { background: #1e1e1e; color: #d4d4d4; }
@@ -281,7 +281,7 @@ function generateLandingPage(baseUrl: string): string {
   </style>
 </head>
 <body>
-  <h1>Dodo Knowledge MCP</h1>
+   <h1>Example Project MCP</h1>
   <p>This MCP server is available at:</p>
   <pre>${mcpUrl}</pre>
 
@@ -292,7 +292,7 @@ function generateLandingPage(baseUrl: string): string {
   </ol>
   <pre>{
   "mcpServers": {
-    "dodo-knowledge-mcp": {
+     "example-project-mcp": {
       "url": "${mcpUrl}"
     }
   }
@@ -305,7 +305,7 @@ function generateLandingPage(baseUrl: string): string {
   </ol>
   <pre>{
   "mcpServers": {
-    "dodo-knowledge-mcp": {
+     "example-project-mcp": {
       "serverUrl": "${mcpUrl}"
     }
   }
@@ -324,7 +324,7 @@ function generateLandingPage(baseUrl: string): string {
   </ol>
   <pre>{
   "mcpServers": {
-    "dodo-knowledge-mcp": {
+     "example-project-mcp": {
       "command": "npx",
       "args": ["-y", "mcp-remote@latest", "${mcpUrl}"]
     }
@@ -351,7 +351,7 @@ function generateLandingPage(baseUrl: string): string {
   </ul>
 
   <hr>
-  <p>&copy; ${new Date().getFullYear()} DodoPayments. All rights reserved.</p>
+  <p class="muted">ContextMCP example deployment</p>
 </body>
 </html>`;
 }
@@ -366,7 +366,7 @@ export default {
 
     // MCP endpoint (Streamable HTTP)
     if (url.pathname === '/mcp') {
-      return DodoKnowledgeMCP.serve('/mcp').fetch(request, env, ctx);
+      return ExampleProjectMCP.serve('/mcp').fetch(request, env, ctx);
     }
 
     // Health check endpoint
@@ -374,7 +374,7 @@ export default {
       return new Response(
         JSON.stringify({
           status: 'ok',
-          service: 'dodo-knowledge-mcp',
+          service: 'example-project-mcp',
           endpoints: {
             mcp: '/mcp',
             rest: 'GET /search?query=...',

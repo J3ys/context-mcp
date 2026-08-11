@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "ContextMCP project template - Self-hosted MCP server for your documentation",
+  "description": "ContextMCP project template - Self-hosted MCP server for code and documentation in local projects",
   "scripts": {
     "reindex": "tsx scripts/reindex.ts",
     "reindex:dry": "tsx scripts/reindex.ts --dry-run",
@@ -21,6 +21,7 @@
   "keywords": [
     "mcp",
     "documentation",
+    "code-search",
     "semantic-search",
     "pinecone",
     "embeddings",

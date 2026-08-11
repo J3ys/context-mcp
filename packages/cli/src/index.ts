@@ -2,7 +2,7 @@
 /**
  * ContextMCP CLI
  *
- * Scaffold a self-hosted MCP server for your documentation.
+ * Scaffold a self-hosted MCP server for local project code and documentation.
  *
  * Usage:
  *   npx contextmcp init [project-name]
@@ -34,7 +34,7 @@ const program = new Command();
 
 program
   .name('contextmcp')
-  .description('CLI to scaffold a ContextMCP documentation RAG server')
+  .description('CLI to scaffold a ContextMCP code-and-documentation RAG server')
   .version(getPackageVersion());
 
 program

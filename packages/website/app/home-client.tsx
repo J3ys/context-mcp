@@ -104,18 +104,18 @@ export function HomeClient() {
               <div className="p-12 lg:p-16 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-white/5">
                 <div className="flex items-center gap-3 mb-8">
                   <div className="h-10 w-10 flex items-center justify-center rounded-lg bg-white/5 border border-white/10">
-                    <Image src="/SVG/Brandmark.svg" width={20} height={20} alt="Dodo Payments logo" />
+                    <Image src="/SVG/Brandmark.svg" width={20} height={20} alt="ContextMCP logo" />
                   </div>
                   <div className="h-px w-8 bg-zinc-800" aria-hidden="true" />
                   <span className="text-sm font-mono text-zinc-400">CASE STUDY</span>
                 </div>
 
                 <h2 id="case-study-heading" className="text-3xl md:text-4xl font-bold text-white mb-6">
-                  Powering <span className="text-[#60A5FA]">Sentra</span> at Dodo Payments.
+                  Built from real-world AI assistant needs.
                 </h2>
                 <p className="text-lg text-zinc-400 leading-relaxed mb-8">
                   We built ContextMCP to solve a problem we faced ourselves.
-                  Sentra, our AI agent, needed reliable access to documentations spread across multiple repositories.
+                  Our internal AI assistant needed reliable access to code and documentation spread across multiple repositories.
                 </p>
 
                 <p className="text-lg text-zinc-400 leading-relaxed mb-8">
@@ -123,16 +123,16 @@ export function HomeClient() {
                 </p>
 
                 <p className="text-lg text-zinc-400 leading-relaxed mb-8">
-                  ContextMCP indexes everything at set intervals so Sentra always works with up to date information.
+                  ContextMCP indexes everything at set intervals so internal assistants always work with up-to-date information.
                 </p>
 
                 <a
-                  href="https://github.com/dodopayments/context-chat"
+                  href="https://github.com/contextmcp/context-chat"
                   target="_blank"
                   rel="noreferrer"
                   className="text-[#60A5FA] font-medium hover:underline"
                 >
-                  Sentra&apos;s chat UI is open source too &rarr; ContextChat
+                  The companion chat UI is open source too &rarr; ContextChat
                 </a>
 
               </div>
@@ -162,4 +162,3 @@ export function HomeClient() {
     </main>
   );
 }
-

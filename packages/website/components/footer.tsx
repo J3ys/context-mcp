@@ -11,7 +11,7 @@ export function Footer() {
                         <div className="relative h-5 w-5 opacity-80">
                             <Image
                                 src="/SVG/Brandmark.svg"
-                                alt="Dodo Payments"
+                                alt="ContextMCP"
                                 fill
                                 className="object-contain"
                             />
@@ -20,14 +20,14 @@ export function Footer() {
                         <span className="font-semibold text-white">ContextMCP</span>
                     </div>
                     <p className="text-sm text-zinc-400">
-                        Maintained by the engineering team at <a href="https://dodopayments.com" className="text-zinc-300 hover:text-[#60A5FA] transition-colors">Dodo Payments</a>.
+                        Maintained by the ContextMCP contributors.
                     </p>
                 </div>
 
                 <div className="flex gap-6 text-sm font-medium text-zinc-300">
-                    <Link href="https://github.com/dodopayments/context-mcp" className="hover:text-white transition-colors">GitHub</Link>
-                    <Link href="https://x.com/dodopayments" className="hover:text-white transition-colors">X/Twitter</Link>
-                    <Link href="https://dodopayments.com/docs" className="hover:text-white transition-colors">Dodo Docs</Link>
+                    <Link href="https://github.com/contextmcp/context-mcp" className="hover:text-white transition-colors">GitHub</Link>
+                    <Link href="https://contextmcp.ai/docs" className="hover:text-white transition-colors">Docs</Link>
+                    <Link href="https://discord.gg/bYqAp4ayYh" className="hover:text-white transition-colors">Discord</Link>
                 </div>
             </div>
         </footer>

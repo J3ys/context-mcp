@@ -8,12 +8,12 @@ function SidebarFooter() {
     return (
         // px-1.5 lines the text up with the icon glyphs above, which sit in p-1.5 buttons.
         <p className="mt-2 px-1.5 text-xs text-zinc-600">
-            Built by{' '}
+            Maintained by{' '}
             <a
-                href="https://dodopayments.com"
+                href="https://contextmcp.ai"
                 className="text-zinc-400 transition-colors hover:text-[#60A5FA]"
             >
-                Dodo Payments
+                the ContextMCP contributors
             </a>
         </p>
     );

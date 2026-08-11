@@ -15,7 +15,7 @@ If you discover a security vulnerability, please **do not** open a public issue.
 
 ### How to Report
 
-1. **Email**: Send details to [security@dodopayments.com](mailto:security@dodopayments.com)
+1. **Private report**: Use GitHub's private vulnerability reporting for this repository or contact the maintainers through a non-public channel.
 2. **Include**:
    - Description of the vulnerability
    - Steps to reproduce
@@ -46,4 +46,3 @@ When using ContextMCP:
 - Follow the principle of least privilege for API access
 
 Thank you for helping keep ContextMCP and its users safe!
-

@@ -46,7 +46,7 @@ Configure these variables in `wrangler.jsonc`:
 | Variable              | Default                   | Description                                          |
 | --------------------- | ------------------------- | ---------------------------------------------------- |
 | `SERVER_NAME`         | `my-docs-mcp`             | Name of your MCP server                              |
-| `SERVER_DESCRIPTION`  | `Search documentation...` | Description shown to clients                         |
+| `SERVER_DESCRIPTION`  | `Semantic search across code and documentation in local projects` | Description shown to clients |
 | `PINECONE_INDEX_NAME` | `my-docs-mcp`             | Pinecone index name                                  |
 | `EMBEDDING_PROVIDER`  | `openai`                  | `openai` / `gemini` / `cohere` / `voyage` / `ollama` |
 | `EMBEDDING_MODEL`     | `text-embedding-3-large`  | Embedding model for the chosen provider              |

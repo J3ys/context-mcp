@@ -45,7 +45,7 @@ export function Navbar() {
                     <div className="relative h-7 w-7 transition-transform group-hover:scale-105">
                         <Image
                             src="/SVG/Brandmark.svg"
-                            alt="Dodo Payments"
+                            alt="ContextMCP"
                             fill
                             className="object-contain"
                         />
@@ -56,7 +56,7 @@ export function Navbar() {
 
                 <div className="flex items-center gap-4">
                     <Link
-                        href="https://github.com/dodopayments/context-mcp"
+                        href="https://github.com/contextmcp/context-mcp"
                         target="_blank"
                         className="flex items-center gap-2 rounded-full border border-white/25 bg-white/15 px-4 py-1.5 text-sm font-medium text-zinc-200 transition-all hover:bg-white/20 hover:text-white hover:border-white/35"
                     >

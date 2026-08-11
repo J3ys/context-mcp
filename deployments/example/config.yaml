@@ -1,9 +1,9 @@
-﻿# ContextMCP Configuration for Dodo Payments
+﻿# ContextMCP Configuration for Example Project
 # Full configuration matching the original parse scripts
 
 vectordb:
   provider: pinecone
-  indexName: dodo-knowledge-mcp
+  indexName: example-project-mcp
   pinecone:
     cloud: aws
     region: us-east-1
@@ -49,12 +49,12 @@ sources:
   # =============================================================================
   # MAIN DOCUMENTATION (MDX)
   # =============================================================================
-  - name: dodo-docs
-    displayName: 'Dodo Payments Documentation'
+  - name: example-docs
+    displayName: 'Example Project Documentation'
     type: github
-    repository: dodopayments/dodo-docs
+    repository: exampleco/docs
     parser: mdx
-    baseUrl: https://docs.dodopayments.com
+    baseUrl: https://docs.example.com
     # Skip directories that shouldn't be indexed
     skipDirs:
       - .git
@@ -89,13 +89,13 @@ sources:
   # =============================================================================
   # OPENAPI SPECIFICATION
   # =============================================================================
-  - name: dodo-api
-    displayName: 'Dodo Payments API Reference'
+  - name: example-api
+    displayName: 'Example Project API Reference'
     type: github
-    repository: dodopayments/dodo-docs
+    repository: exampleco/docs
     path: openapi
     parser: openapi
-    baseUrl: https://docs.dodopayments.com/api-reference
+    baseUrl: https://docs.example.com/api-reference
     # Directory containing MDX files with openapi: frontmatter for URL mapping
     urlMappingDir: api-reference
 
@@ -105,10 +105,10 @@ sources:
   - name: billingsdk
     displayName: 'BillingSDK Documentation'
     type: github
-    repository: dodopayments/billingsdk
+    repository: exampleco/billingsdk
     path: content/docs
     parser: mdx
-    baseUrl: https://billingsdk.com/docs
+    baseUrl: https://billingsdk.example.com/docs
     skipDirs:
       - .git
       - .github
@@ -120,30 +120,30 @@ sources:
   # The website publishes a hand-curated AI reference at /llms-full.txt covering
   # products, pricing, comparisons, case studies, and company info. It's served
   # as text/plain, so saveAs gives it a .md extension for the markdown parser.
-  - name: dodo-website
-    displayName: 'Dodo Payments Website'
+  - name: example-website
+    displayName: 'Example Project Website'
     type: url
-    url: https://dodopayments.com/llms-full.txt
+    url: https://example.com/llms-full.txt
     saveAs: llms-full.md
     parser: markdown
-    baseUrl: https://dodopayments.com
+    baseUrl: https://example.com
 
   # =============================================================================
   # MARKETING WEBSITE PAGES (full markdown of every page llms-full.txt links to)
   # =============================================================================
   # followLinks treats llms-full.txt as a link index: it fetches the .md version
-  # of every dodopayments.com page it references and indexes the full content,
+  # of every example.com page it references and indexes the full content,
   # giving deeper per-page detail than the aggregate above with canonical
   # per-page citation URLs.
-  - name: dodo-website-pages
-    displayName: 'Dodo Payments Website Pages'
+  - name: example-website-pages
+    displayName: 'Example Project Website Pages'
     type: url
-    url: https://dodopayments.com/llms-full.txt
+    url: https://example.com/llms-full.txt
     parser: markdown
-    baseUrl: https://dodopayments.com
+    baseUrl: https://example.com
     followLinks:
       hostAllowlist:
-        - dodopayments.com
+        - example.com
       appendExtension: .md
 
   # =============================================================================
@@ -152,7 +152,7 @@ sources:
   - name: sdk-typescript
     displayName: 'TypeScript SDK'
     type: github
-    repository: dodopayments/dodopayments-typescript
+    repository: exampleco/sdk-typescript
     parser: markdown
     language: typescript
     skipDirs: *sdkSkipDirs
@@ -161,7 +161,7 @@ sources:
   - name: sdk-ruby
     displayName: 'Ruby SDK'
     type: github
-    repository: dodopayments/dodopayments-ruby
+    repository: exampleco/sdk-ruby
     parser: markdown
     language: ruby
     skipDirs: *sdkSkipDirs
@@ -170,7 +170,7 @@ sources:
   - name: sdk-python
     displayName: 'Python SDK'
     type: github
-    repository: dodopayments/dodopayments-python
+    repository: exampleco/sdk-python
     parser: markdown
     language: python
     skipDirs: *sdkSkipDirs
@@ -179,7 +179,7 @@ sources:
   - name: sdk-go
     displayName: 'Go SDK'
     type: github
-    repository: dodopayments/dodopayments-go
+    repository: exampleco/sdk-go
     parser: markdown
     language: go
     skipDirs: *sdkSkipDirs
@@ -188,7 +188,7 @@ sources:
   - name: sdk-java
     displayName: 'Java SDK'
     type: github
-    repository: dodopayments/dodopayments-java
+    repository: exampleco/sdk-java
     parser: markdown
     language: java
     skipDirs: *sdkSkipDirs
@@ -197,7 +197,7 @@ sources:
   - name: sdk-php
     displayName: 'PHP SDK'
     type: github
-    repository: dodopayments/dodopayments-php
+    repository: exampleco/sdk-php
     parser: markdown
     language: php
     skipDirs: *sdkSkipDirs
@@ -206,7 +206,7 @@ sources:
   - name: sdk-csharp
     displayName: 'C# SDK'
     type: github
-    repository: dodopayments/dodopayments-csharp
+    repository: exampleco/sdk-csharp
     parser: markdown
     language: csharp
     skipDirs: *sdkSkipDirs
@@ -215,16 +215,16 @@ sources:
   - name: sdk-kotlin
     displayName: 'Kotlin SDK'
     type: github
-    repository: dodopayments/dodopayments-kotlin
+    repository: exampleco/sdk-kotlin
     parser: markdown
     language: kotlin
     skipDirs: *sdkSkipDirs
     skipFiles: *sdkSkipFiles
 
-  - name: dodo-adapters
-    displayName: 'Dodo Adapters'
+  - name: example-adapters
+    displayName: 'Example Adapters'
     type: github
-    repository: dodopayments/dodo-adapters
+    repository: exampleco/adapters
     parser: markdown
     language: typescript
     skipDirs: *sdkSkipDirs
@@ -233,34 +233,34 @@ sources:
   - name: ingestion-blueprints
     displayName: 'Ingestion Blueprints'
     type: github
-    repository: dodopayments/ingestion-blueprints
+    repository: exampleco/ingestion-blueprints
     parser: markdown
     language: typescript
     skipDirs: *sdkSkipDirs
     skipFiles: *sdkSkipFiles
 
-  - name: dodo-migrate
-    displayName: 'Dodo Migrate CLI'
+  - name: example-migrate
+    displayName: 'Example Migrate CLI'
     type: github
-    repository: dodopayments/dodo-migrate
+    repository: exampleco/migrate
     parser: markdown
     language: typescript
     skipDirs: *sdkSkipDirs
     skipFiles: *sdkSkipFiles
 
-  - name: dodo-woocommerce
+  - name: example-woocommerce
     displayName: 'WooCommerce Plugin'
     type: github
-    repository: dodopayments/dodo-woocommerce
+    repository: exampleco/woocommerce
     parser: markdown
     language: php
     skipDirs: *sdkSkipDirs
     skipFiles: *sdkSkipFiles
 
-  - name: dodopayments-figma
+  - name: example-figma
     displayName: 'Figma Plugin'
     type: github
-    repository: dodopayments/dodopayments-figma
+    repository: exampleco/figma-plugin
     parser: markdown
     language: typescript
     skipDirs: *sdkSkipDirs

@@ -24,7 +24,7 @@
   // Environment variables - customize these for your project
   "vars": {
     "SERVER_NAME": "my-docs-mcp",
-    "SERVER_DESCRIPTION": "Search documentation using semantic search",
+    "SERVER_DESCRIPTION": "Semantic search across code and documentation in local projects",
     "PINECONE_INDEX_NAME": "my-docs-mcp",
 
     // Embedding provider: "openai", "gemini", "cohere", "voyage", or "ollama"
@@ -52,4 +52,3 @@
     "enabled": true
   }
 }
-

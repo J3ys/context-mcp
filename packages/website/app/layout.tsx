@@ -21,11 +21,12 @@ export const metadata: Metadata = {
     default: "ContextMCP - The Knowledge Layer for AI",
     template: "%s | ContextMCP",
   },
-  description: "Self-hosted MCP server that creates a queryable brain from your documentation. Connect Cursor, Windsurf, and Claude to your codebase's ground truth. Index documentation from multiple sources and serve it via Model Context Protocol.",
+  description: "Self-hosted MCP server that creates a queryable brain from your code and documentation. Connect Cursor, Windsurf, and Claude to your codebase's ground truth. Index project context from multiple sources and serve it via Model Context Protocol.",
   keywords: [
     "MCP",
     "Model Context Protocol",
     "AI documentation",
+    "code search",
     "vector database",
     "embeddings",
     "self-hosted",
@@ -38,9 +39,9 @@ export const metadata: Metadata = {
     "AI agents",
     "knowledge base",
   ],
-  authors: [{ name: "Dodo Payments" }],
-  creator: "Dodo Payments",
-  publisher: "Dodo Payments",
+  authors: [{ name: "ContextMCP Contributors" }],
+  creator: "ContextMCP Contributors",
+  publisher: "ContextMCP Contributors",
   robots: {
     index: true,
     follow: true,
@@ -58,7 +59,7 @@ export const metadata: Metadata = {
     url: "/",
     siteName: "ContextMCP",
     title: "ContextMCP - The Knowledge Layer for AI",
-    description: "Self-hosted MCP server that creates a queryable brain from your documentation. Connect Cursor, Windsurf, and Claude to your codebase's ground truth.",
+    description: "Self-hosted MCP server that creates a queryable brain from your code and documentation. Connect Cursor, Windsurf, and Claude to your codebase's ground truth.",
     images: [
       {
         url: "/og-image.png",
@@ -71,8 +72,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "ContextMCP - The Knowledge Layer for AI",
-    description: "Self-hosted MCP server that creates a queryable brain from your documentation.",
-    creator: "@dodopayments",
+    description: "Self-hosted MCP server that creates a queryable brain from your code and documentation.",
+    creator: "@contextmcp",
     images: ["/og-image.png"],
   },
   icons: {
@@ -99,12 +100,12 @@ function StructuredData() {
     name: "ContextMCP",
     applicationCategory: "DeveloperApplication",
     operatingSystem: "Any",
-    description: "Self-hosted MCP server that creates a queryable brain from your documentation. Connect Cursor, Windsurf, and Claude to your codebase's ground truth.",
+    description: "Self-hosted MCP server that creates a queryable brain from your code and documentation. Connect Cursor, Windsurf, and Claude to your codebase's ground truth.",
     url: siteUrl,
     author: {
       "@type": "Organization",
-      name: "Dodo Payments",
-      url: "https://dodopayments.com",
+      name: "ContextMCP Contributors",
+      url: siteUrl,
     },
     offers: {
       "@type": "Offer",
@@ -118,7 +119,7 @@ function StructuredData() {
     "@type": "WebSite",
     name: "ContextMCP",
     url: siteUrl,
-    description: "Self-hosted MCP server that creates a queryable brain from your documentation.",
+    description: "Self-hosted MCP server that creates a queryable brain from your code and documentation.",
     potentialAction: {
       "@type": "SearchAction",
       target: {

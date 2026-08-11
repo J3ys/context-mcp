@@ -19,7 +19,7 @@ export const baseOptions: BaseLayoutProps = {
         transparentMode: 'none',
     },
     // Renders its own GitHub icon — don't add a second one to `links`.
-    githubUrl: 'https://github.com/dodopayments/context-mcp',
+    githubUrl: 'https://github.com/contextmcp/context-mcp',
     links: [
         {
             type: 'icon',

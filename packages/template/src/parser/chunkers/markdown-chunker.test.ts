@@ -47,24 +47,24 @@ describe('buildFileSourceUrl', () => {
   it('maps a followLinks page file back to its canonical page URL (no extension)', () => {
     const src = source({
       type: 'url',
-      baseUrl: 'https://dodopayments.com',
-      followLinks: { hostAllowlist: ['dodopayments.com'], appendExtension: '.md', maxPages: 500 },
+      baseUrl: 'https://example.com',
+      followLinks: { hostAllowlist: ['example.com'], appendExtension: '.md', maxPages: 500 },
     });
-    expect(buildFileSourceUrl(src, 'payments.md')).toBe('https://dodopayments.com/payments');
+    expect(buildFileSourceUrl(src, 'payments.md')).toBe('https://example.com/payments');
     expect(buildFileSourceUrl(src, 'case-studies/peerpush.md')).toBe(
-      'https://dodopayments.com/case-studies/peerpush'
+      'https://example.com/case-studies/peerpush'
     );
   });
 
   it('uses the site root for a plain (single-file) url source', () => {
-    const src = source({ type: 'url', baseUrl: 'https://dodopayments.com' });
-    expect(buildFileSourceUrl(src, 'llms-full.md')).toBe('https://dodopayments.com');
+    const src = source({ type: 'url', baseUrl: 'https://example.com' });
+    expect(buildFileSourceUrl(src, 'llms-full.md')).toBe('https://example.com');
   });
 
   it('builds a GitHub blob URL for repository sources', () => {
-    const src = source({ type: 'github', repository: 'dodopayments/dodopayments-go' });
+    const src = source({ type: 'github', repository: 'exampleco/sdk-go' });
     expect(buildFileSourceUrl(src, 'README.md')).toBe(
-      'https://github.com/dodopayments/dodopayments-go/blob/main/README.md'
+      'https://github.com/exampleco/sdk-go/blob/main/README.md'
     );
   });
 });

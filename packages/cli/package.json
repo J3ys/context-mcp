@@ -1,7 +1,7 @@
 {
   "name": "contextmcp",
   "version": "0.5.0",
-  "description": "CLI to scaffold a ContextMCP documentation RAG server",
+  "description": "CLI to scaffold a ContextMCP code-and-documentation RAG server",
   "type": "module",
   "bin": {
     "contextmcp": "./dist/index.js"
@@ -33,7 +33,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dodopayments/context-mcp.git",
+    "url": "https://github.com/contextmcp/context-mcp.git",
     "directory": "packages/cli"
   },
   "dependencies": {

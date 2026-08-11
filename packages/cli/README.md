@@ -1,6 +1,6 @@
 # ContextMCP CLI
 
-CLI tool to scaffold self-hosted MCP servers for your documentation. Create a searchable knowledge base from your docs that AI assistants can query via the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) and REST API.
+CLI tool to scaffold self-hosted MCP servers for local project code and documentation. Create a searchable knowledge base from your code and docs that AI assistants can query via the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) and REST API.
 
 <p align="left">
   <a href="https://www.npmjs.com/package/contextmcp">
@@ -30,7 +30,7 @@ contextmcp init my-docs-mcp
 npx contextmcp init [project-name]
 ```
 
-The `init` command scaffolds a new ContextMCP project with everything you need to index your documentation and deploy an MCP server.
+The `init` command scaffolds a new ContextMCP project with everything you need to index your code and documentation and deploy an MCP server.
 
 #### Interactive Mode
 
@@ -59,10 +59,10 @@ cd my-docs-mcp
 cp .env.example .env
 # Edit .env with your PINECONE_API_KEY and OPENAI_API_KEY
 
-# Configure documentation sources
-# Edit config.yaml to add your GitHub repos, docs, APIs
+# Configure code and documentation sources
+# Edit config.yaml to add your repos, docs, APIs, and code sources
 
-# Index your documentation
+# Index your project context
 npm run reindex
 
 # Deploy the MCP server
@@ -98,6 +98,8 @@ my-docs-mcp/
 | `mdx`      | MDX/JSX documentation | Mintlify, Fumadocs, Docusaurus |
 | `markdown` | Plain Markdown files  | READMEs, CHANGELOGs            |
 | `openapi`  | OpenAPI/Swagger specs | API reference docs             |
+| `html`     | Raw HTML pages        | static docs exports            |
+| `code`     | Source code           | TypeScript, Java, Python       |
 
 ## Requirements
 
@@ -108,7 +110,7 @@ my-docs-mcp/
 
 ## How It Works
 
-1. **Parse** - Extract content from your docs, APIs, and READMEs
+1. **Parse** - Extract content from your code, docs, APIs, and READMEs
 2. **Chunk** - Split into semantic chunks optimized for search
 3. **Embed** - Generate embeddings (OpenAI, Gemini, Cohere, Voyage, or local Ollama)
 4. **Store** - Upload to Pinecone vector database
@@ -120,13 +122,13 @@ For full documentation, visit [contextmcp.ai/docs](https://contextmcp.ai/docs)
 
 ## Contributing
 
-Contributions are welcome! Please see the [main repository](https://github.com/dodopayments/context-mcp) for contribution guidelines.
+Contributions are welcome! Please see the [main repository](https://github.com/contextmcp/context-mcp) for contribution guidelines.
 
 ## Related
 
-- [ContextMCP](https://github.com/dodopayments/context-mcp) - Main repository
+- [ContextMCP](https://github.com/contextmcp/context-mcp) - Main repository
 - [Model Context Protocol](https://modelcontextprotocol.io/) - MCP specification
 
 ## License
 
-This project is licensed under the Apache-2.0 Licence. See the main [LICENSE](https://github.com/dodopayments/context-mcp/blob/main/LICENSE) file for details.
+This project is licensed under the Apache-2.0 Licence. See the main [LICENSE](https://github.com/contextmcp/context-mcp/blob/main/LICENSE) file for details.

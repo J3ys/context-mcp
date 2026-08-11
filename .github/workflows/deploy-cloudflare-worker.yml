@@ -7,14 +7,14 @@ on:
     branches:
       - main
     paths:
-      - 'deployments/dodopayments/**'
+      - 'deployments/example/**'
       - '.github/workflows/deploy-cloudflare-worker.yml'
 
   workflow_dispatch:
 
 jobs:
   deploy:
-    name: Deploy Dodo Knowledge MCP Server
+    name: Deploy Example Project MCP Server
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -29,22 +29,21 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: cd deployments/dodopayments/cloudflare-worker && npm install
+        run: cd deployments/example/cloudflare-worker && npm install
 
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: deployments/dodopayments/cloudflare-worker
+          workingDirectory: deployments/example/cloudflare-worker
 
       - name: Generate deploy summary
         run: |
           echo "## Cloudflare Worker Deploy Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Worker:** \`dodo-knowledge-mcp\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Worker:** \`example-project-mcp\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Commit:** \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Branch:** \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
-

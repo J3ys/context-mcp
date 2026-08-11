@@ -28,7 +28,7 @@ By participating in this project, you agree to maintain a respectful and inclusi
    ```
 3. **Add the upstream remote**:
    ```bash
-   git remote add upstream https://github.com/dodopayments/context-mcp.git
+   git remote add upstream https://github.com/contextmcp/context-mcp.git
    ```
 
 ## Development Setup
@@ -80,7 +80,7 @@ context-mcp/
 │   ├── template/         # Project template (scaffolded to users)
 │   └── website/          # Documentation website
 └── deployments/
-    └── dodopayments/     # Example deployment configuration
+    └── example/          # Example deployment configuration
 ```
 
 ### Package Descriptions
@@ -220,4 +220,3 @@ Contributors will be recognized in:
 - GitHub contributors list
 
 Thank you for contributing to ContextMCP! 🎉
-

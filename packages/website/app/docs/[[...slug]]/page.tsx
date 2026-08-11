@@ -18,7 +18,7 @@ export default async function Page(props: {
             full={page.data.full}
             tableOfContent={{ style: 'clerk' }}
             editOnGithub={{
-                owner: 'dodopayments',
+                owner: 'contextmcp',
                 repo: 'context-mcp',
                 sha: 'main',
                 path: `packages/website/content/docs/${page.path}`,
@@ -50,7 +50,7 @@ export async function generateMetadata(props: {
 
     return {
         title: page.data.title,
-        description: page.data.description || "ContextMCP documentation - Learn how to set up and use ContextMCP for indexing your documentation.",
+        description: page.data.description || "ContextMCP documentation - Learn how to set up and use ContextMCP for indexing your code and documentation.",
         openGraph: {
             title: `${page.data.title} | ContextMCP`,
             description: page.data.description || "ContextMCP documentation",

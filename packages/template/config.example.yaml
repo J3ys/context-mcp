@@ -1,8 +1,8 @@
 # ContextMCP Configuration
-# Self-hosted MCP server for your documentation
+# Self-hosted MCP server for local project code and documentation
 #
 # Copy this file to config.yaml and customize for your project.
-# See https://github.com/dodopayments/context-mcp for documentation.
+# See https://github.com/contextmcp/context-mcp for documentation.
 
 # =============================================================================
 # VECTOR DATABASE
@@ -44,7 +44,7 @@ embeddings:
   dimensions: 3072
 
 # =============================================================================
-# DOCUMENTATION SOURCES
+# PROJECT CONTEXT SOURCES
 # =============================================================================
 sources:
   # ---------------------------------------------------------------------------
@@ -116,6 +116,19 @@ sources:
     localPath: ./docs/
     parser: markdown
     optional: true # Don't fail if path doesn't exist
+
+  # ---------------------------------------------------------------------------
+  # Example 5: Local codebase (for implementation context)
+  # ---------------------------------------------------------------------------
+  # Use 'code' for source files when you want class- or method-level chunks.
+  - name: local-code
+    displayName: 'Local Codebase'
+    type: local
+    localPath: ./src/
+    parser: code
+    language: typescript
+    codeGranularity: method
+    optional: true
 
   # ---------------------------------------------------------------------------
   # Example 5: GitLab repository (gitlab.com or self-hosted)

@@ -13,7 +13,7 @@ describe('resolveUrlFilename', () => {
   });
 
   it('uses saveAs verbatim to override the extension', () => {
-    expect(resolveUrlFilename('https://dodopayments.com/llms-full.txt', 'llms-full.md')).toBe(
+    expect(resolveUrlFilename('https://example.com/llms-full.txt', 'llms-full.md')).toBe(
       'llms-full.md'
     );
   });
@@ -40,36 +40,36 @@ describe('resolveUrlFilename', () => {
 
 describe('extractSeedLinks', () => {
   const seed = `# Index
-- [Payments](https://dodopayments.com/payments): accept payments.
-- [Pricing](https://dodopayments.com/pricing).
-- [Docs](https://docs.dodopayments.com/intro) external host.
-- duplicate (https://dodopayments.com/payments)
-- root link https://dodopayments.com/ and https://dodopayments.com
-- [Case](https://dodopayments.com/case-studies/peerpush?utm=x#top)
+- [Payments](https://example.com/payments): accept payments.
+- [Pricing](https://example.com/pricing).
+- [Docs](https://docs.example.com/intro) external host.
+- duplicate (https://example.com/payments)
+- root link https://example.com/ and https://example.com
+- [Case](https://example.com/case-studies/peerpush?utm=x#top)
 `;
 
   it('extracts, dedupes and sorts apex links within the host allowlist', () => {
-    expect(extractSeedLinks(seed, ['dodopayments.com'])).toEqual([
-      'https://dodopayments.com/case-studies/peerpush',
-      'https://dodopayments.com/payments',
-      'https://dodopayments.com/pricing',
+    expect(extractSeedLinks(seed, ['example.com'])).toEqual([
+      'https://example.com/case-studies/peerpush',
+      'https://example.com/payments',
+      'https://example.com/pricing',
     ]);
   });
 
   it('excludes hosts outside the allowlist', () => {
-    expect(extractSeedLinks(seed, ['dodopayments.com'])).not.toContain(
-      'https://docs.dodopayments.com/intro'
+    expect(extractSeedLinks(seed, ['example.com'])).not.toContain(
+      'https://docs.example.com/intro'
     );
   });
 
   it('drops query, fragment, trailing slash and the bare host root', () => {
-    const links = extractSeedLinks(seed, ['dodopayments.com']);
-    expect(links).toContain('https://dodopayments.com/case-studies/peerpush');
-    expect(links).not.toContain('https://dodopayments.com');
-    expect(links).not.toContain('https://dodopayments.com/');
+    const links = extractSeedLinks(seed, ['example.com']);
+    expect(links).toContain('https://example.com/case-studies/peerpush');
+    expect(links).not.toContain('https://example.com');
+    expect(links).not.toContain('https://example.com/');
   });
 
   it('returns all hosts when the allowlist is empty', () => {
-    expect(extractSeedLinks(seed)).toContain('https://docs.dodopayments.com/intro');
+    expect(extractSeedLinks(seed)).toContain('https://docs.example.com/intro');
   });
 });

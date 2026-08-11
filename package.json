@@ -2,7 +2,7 @@
   "name": "contextmcp",
   "version": "1.0.0",
   "private": true,
-  "description": "ContextMCP - Self-hosted MCP server for your documentation",
+  "description": "ContextMCP - Self-hosted MCP server for code and documentation in local projects",
   "workspaces": [
     "packages/cli",
     "packages/template"
@@ -15,15 +15,16 @@
     "lint": "npm run lint --workspaces --if-present",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "reindex:dodo": "tsx packages/template/scripts/reindex.ts --config deployments/dodopayments/config.yaml",
-    "reindex:dodo:dry": "tsx packages/template/scripts/reindex.ts --config deployments/dodopayments/config.yaml --dry-run",
-    "deploy:dodo": "wrangler deploy --config deployments/dodopayments/cloudflare-worker/wrangler.jsonc",
-    "dev:dodo": "wrangler dev --config deployments/dodopayments/cloudflare-worker/wrangler.jsonc"
+    "reindex:example": "tsx packages/template/scripts/reindex.ts --config deployments/example/config.yaml",
+    "reindex:example:dry": "tsx packages/template/scripts/reindex.ts --config deployments/example/config.yaml --dry-run",
+    "deploy:example": "wrangler deploy --config deployments/example/cloudflare-worker/wrangler.jsonc",
+    "dev:example": "wrangler dev --config deployments/example/cloudflare-worker/wrangler.jsonc"
   },
   "keywords": [
     "mcp",
     "model-context-protocol",
     "documentation",
+    "code-search",
     "semantic-search",
     "rag",
     "pinecone",

@@ -229,7 +229,7 @@ async function searchDocs(
 
 function formatResults(results: SearchResult[], query: string, serverName: string): string {
   const lines: string[] = [
-    `# ${serverName} Documentation`,
+    `# ${serverName} Project Context`,
     `> Query: ${query}`,
     `> Results: ${results.length}`,
     '',
@@ -264,14 +264,15 @@ export class ContextMCP extends McpAgent<Env> {
   async init() {
     const env = this.env;
     const serverName = env.SERVER_NAME || 'contextmcp';
-    const description = env.SERVER_DESCRIPTION || 'Search documentation';
+    const description =
+      env.SERVER_DESCRIPTION || 'Semantic search across code and documentation in local projects';
 
     const pinecone = createPineconeClient(env);
 
     this.server.registerTool(
-      'search_docs',
+      'search_project_context',
       {
-        title: `Search ${serverName} Documentation`,
+        title: `Search ${serverName} Project Context`,
         description: description,
         inputSchema: {
           query: z
@@ -360,7 +361,7 @@ function generateLandingPage(baseUrl: string, serverName: string): string {
 <body>
   <span class="badge">MCP Server</span>
   <h1>${serverName}</h1>
-  <p class="muted">Powered by ContextMCP - Self-hosted MCP for your documentation</p>
+  <p class="muted">Powered by ContextMCP - Self-hosted MCP for local project code and documentation</p>
   
   <p>This MCP server is available at:</p>
   <pre>${mcpUrl}</pre>
@@ -401,7 +402,7 @@ function generateLandingPage(baseUrl: string, serverName: string): string {
 
   <hr>
   <p class="muted">
-    <a href="https://github.com/contextmcp/contextmcp">ContextMCP</a> - 
+    <a href="https://github.com/contextmcp/context-mcp">ContextMCP</a> - 
     Self-hosted MCP for your documentation
   </p>
 </body>

@@ -1,11 +1,11 @@
-# Dodo Knowledge MCP - Cloudflare Worker
+# Example Project MCP - Cloudflare Worker
 
-A remote MCP (Model Context Protocol) server deployed on Cloudflare Workers with built-in Pinecone vector search for Dodo Payments documentation.
+A remote MCP (Model Context Protocol) server deployed on Cloudflare Workers with built-in Pinecone vector search for example project code and documentation.
 
 ## Features
 
 - **MCP Server**: Streamable HTTP transport for AI assistants (Cursor, Windsurf, Claude Desktop)
-- **Semantic Search**: Vector search across API Reference, SDK docs, BillingSDK, and guides
+- **Semantic Search**: Vector search across docs, APIs, SDKs, and code repositories
 - **REST API**: Direct search endpoint for non-MCP integrations
 - **Durable Objects**: State management via Cloudflare's agents framework
 
@@ -44,7 +44,7 @@ The following variables are pre-configured in `wrangler.jsonc`:
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `PINECONE_INDEX_NAME` | `dodo-knowledge-mcp` | Pinecone index name |
+| `PINECONE_INDEX_NAME` | `example-project-mcp` | Pinecone index name |
 | `EMBEDDING_MODEL` | `text-embedding-3-large` | OpenAI embedding model |
 | `DEFAULT_TOP_K` | `10` | Default number of search results |
 | `MAX_TOP_K` | `50` | Maximum allowed results |
@@ -110,7 +110,7 @@ Add to `~/.cursor/mcp.json`:
 ```json
 {
   "mcpServers": {
-    "dodo-knowledge-mcp": {
+    "example-project-mcp": {
       "url": "https://your-worker.workers.dev/mcp"
     }
   }
@@ -124,7 +124,7 @@ Add to `~/.codeium/windsurf/mcp_config.json`:
 ```json
 {
   "mcpServers": {
-    "dodo-knowledge-mcp": {
+    "example-project-mcp": {
       "serverUrl": "https://your-worker.workers.dev/mcp"
     }
   }
@@ -138,7 +138,7 @@ Add to your Claude Desktop config:
 ```json
 {
   "mcpServers": {
-    "dodo-knowledge-mcp": {
+    "example-project-mcp": {
       "command": "npx",
       "args": ["-y", "mcp-remote@latest", "https://your-worker.workers.dev/mcp"]
     }
@@ -156,5 +156,4 @@ npm run tail
 
 ## License
 
-© DodoPayments. All rights reserved.
-
+ContextMCP example deployment.
