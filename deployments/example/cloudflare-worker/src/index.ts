@@ -7,6 +7,7 @@
  * Environment variables (set via wrangler secret):
  * - OPENAI_API_KEY: Required when EMBEDDING_PROVIDER=openai (default)
  * - GEMINI_API_KEY: Required when EMBEDDING_PROVIDER=gemini
+ * - OLLAMA_BASE_URL: Required when EMBEDDING_PROVIDER=ollama (e.g. http://ollama:11434)
  * - PINECONE_API_KEY: Required for vector search
  */
 
@@ -29,8 +30,9 @@ interface Env {
 
   // Variables (set in wrangler.jsonc)
   PINECONE_INDEX_NAME: string;
-  EMBEDDING_PROVIDER: string; // 'openai' | 'gemini'
+  EMBEDDING_PROVIDER: string; // 'openai' | 'gemini' | 'ollama'
   EMBEDDING_MODEL: string;
+  OLLAMA_BASE_URL: string;
   EMBEDDING_DIMENSIONS: string;
   DEFAULT_TOP_K: string;
   MAX_TOP_K: string;
@@ -75,6 +77,21 @@ async function generateQueryEmbedding(env: Env, query: string): Promise<number[]
       },
     });
     return response.embeddings?.[0]?.values ?? [];
+  }
+
+  if (provider === 'ollama') {
+    const ollamaBaseUrl = env.OLLAMA_BASE_URL || 'http://localhost:11434';
+    const response = await fetch(`${ollamaBaseUrl}/api/embeddings`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: env.EMBEDDING_MODEL, prompt: query }),
+    });
+    if (!response.ok) {
+      const text = await response.text();
+      throw new Error(`Ollama embedding request failed (${response.status}): ${text}`);
+    }
+    const json = (await response.json()) as { embedding: number[] };
+    return json.embedding;
   }
 
   // Default: OpenAI. Only text-embedding-3+ accept the `dimensions` param.
