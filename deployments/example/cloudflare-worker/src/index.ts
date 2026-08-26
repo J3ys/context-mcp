@@ -30,6 +30,8 @@ interface Env {
 
   // Variables (set in wrangler.jsonc)
   PINECONE_INDEX_NAME: string;
+  PINECONE_MODE: string; // 'local' | 'cloud'
+  PINECONE_CONTROLLER_HOST: string; // required when PINECONE_MODE=local
   EMBEDDING_PROVIDER: string; // 'openai' | 'gemini' | 'ollama'
   EMBEDDING_MODEL: string;
   OLLAMA_BASE_URL: string;
@@ -56,6 +58,17 @@ interface SearchResult {
   method?: string;
   path?: string;
   language?: string;
+}
+
+// =============================================================================
+// PINECONE CLIENT
+// =============================================================================
+
+function createPineconeClient(env: Env): Pinecone {
+  if (env.PINECONE_MODE === 'local' && env.PINECONE_CONTROLLER_HOST) {
+    return new Pinecone({ apiKey: env.PINECONE_API_KEY, controllerHostUrl: env.PINECONE_CONTROLLER_HOST });
+  }
+  return new Pinecone({ apiKey: env.PINECONE_API_KEY });
 }
 
 // =============================================================================
@@ -223,7 +236,7 @@ export class ExampleProjectMCP extends McpAgent<Env> {
     const defaultTopK = parseInt(env.DEFAULT_TOP_K || '10', 10);
 
     // Initialize clients
-    const pinecone = new Pinecone({ apiKey: env.PINECONE_API_KEY });
+    const pinecone = createPineconeClient(env);
 
     // Register the search_project_context tool
     this.server.registerTool(
@@ -445,7 +458,7 @@ export default {
           });
         }
 
-        const pinecone = new Pinecone({ apiKey: env.PINECONE_API_KEY });
+        const pinecone = createPineconeClient(env);
         const results = await searchDocs(pinecone, env, query, limit);
         const formatted = formatResults(results, query);
 
