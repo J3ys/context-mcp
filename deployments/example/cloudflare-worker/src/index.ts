@@ -273,12 +273,19 @@ export class ExampleProjectMCP extends McpAgent<Env> {
             content: [{ type: 'text', text: formatted }],
           };
         } catch (error: unknown) {
+          const cause = (error as any)?.cause;
+          const cause2 = cause?.cause;
+          const cause3 = cause2?.cause;
+          const causeChain = [cause, cause2, cause3]
+            .filter(Boolean)
+            .map((c: any) => c?.message || String(c))
+            .join(' → ');
           const message = error instanceof Error ? error.message : 'Unknown error';
           return {
             content: [
               {
                 type: 'text',
-                text: `Error searching documentation: ${message}`,
+                text: `Error searching documentation: ${message}${causeChain ? ` (cause: ${causeChain})` : ''}`,
               },
             ],
             isError: true,
@@ -472,8 +479,15 @@ export default {
           },
         });
       } catch (error) {
+        const cause = (error as any)?.cause;
+        const cause2 = cause?.cause;
+        const cause3 = cause2?.cause;
+        const causeChain = [cause, cause2, cause3]
+          .filter(Boolean)
+          .map((c: any) => c?.message || String(c))
+          .join(' → ');
         const message = error instanceof Error ? error.message : 'Unknown error';
-        return new Response(JSON.stringify({ error: message }), {
+        return new Response(JSON.stringify({ error: message, cause: causeChain || undefined }), {
           status: 500,
           headers: { 'Content-Type': 'application/json' },
         });
