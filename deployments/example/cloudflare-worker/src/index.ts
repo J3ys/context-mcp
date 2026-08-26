@@ -30,6 +30,7 @@ interface Env {
 
   // Variables (set in wrangler.jsonc)
   PINECONE_INDEX_NAME: string;
+  PINECONE_INDEX_HOST: string; // optional: direct index host URL (bypasses controller lookup)
   PINECONE_MODE: string; // 'local' | 'cloud'
   PINECONE_CONTROLLER_HOST: string; // required when PINECONE_MODE=local
   EMBEDDING_PROVIDER: string; // 'openai' | 'gemini' | 'ollama'
@@ -167,7 +168,9 @@ async function searchDocs(
   const rerankFetchCount = parseInt(env.RERANK_FETCH_COUNT, 10) || 30;
 
   const returnCount = Math.min(Math.max(1, limit ?? defaultTopK), maxTopK);
-  const index = pinecone.index(env.PINECONE_INDEX_NAME);
+  const index = env.PINECONE_INDEX_HOST
+    ? pinecone.index(env.PINECONE_INDEX_NAME, env.PINECONE_INDEX_HOST)
+    : pinecone.index(env.PINECONE_INDEX_NAME);
   const queryEmbedding = await generateQueryEmbedding(env, query);
 
   const fetchCount = rerankEnabled ? rerankFetchCount : returnCount;
